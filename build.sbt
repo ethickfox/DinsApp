@@ -20,4 +20,7 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-nop" % "2.0.0-alpha1",
 
   "org.postgresql" % "postgresql" % "42.2.14",
+
+  "com.google.code.gson" % "gson" % "2.8.6"
+
 )
