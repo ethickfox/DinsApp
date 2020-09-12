@@ -15,10 +15,10 @@ import scala.util.{Failure, Success}
 
 class MainRoute {
   val api:Route =
-//    path("", () ->
-//      getFromResource("static/index.html")
-//    )~
-    path("users") {
+    path(""){
+      getFromResource("static/index.html")
+    }~
+    path("api") {
       val json = new Gson().toJson(Await.result(getUsers,Duration.Inf))
       log.info(json)
       get{ complete(json) }

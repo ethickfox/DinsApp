@@ -28,5 +28,5 @@ object Main extends App {
   db.createSession()
   val route = new MainRoute
   val bindingFuture = Http().bindAndHandle(route.api,"localhost", port)
-  log.info(s"Server started at the port $port")
+  log.info(s"Server works. Port $port")
 }
