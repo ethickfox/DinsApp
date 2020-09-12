@@ -50,6 +50,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
+import { DataSource} from '@angular/cdk/table';
+import { ReactiveFormsModule} from '@angular/forms';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import {DemoMaterialModule} from './app/material-module';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+// import {TableBasicExample} from './app/table-basic-example';
 
 @NgModule({
   declarations: [
@@ -61,6 +68,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     FormsModule,
     HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
   ],
   exports: [
     A11yModule,
