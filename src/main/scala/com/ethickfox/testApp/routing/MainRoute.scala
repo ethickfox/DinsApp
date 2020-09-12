@@ -19,7 +19,9 @@ class MainRoute {
 //      getFromResource("static/index.html")
 //    )~
     path("users") {
-      get{ complete(new Gson().toJson(Await.result(getUsers,Duration.Inf))) }
+      val json = new Gson().toJson(Await.result(getUsers,Duration.Inf))
+      log.info(json)
+      get{ complete(json) }
     } ~
     pathPrefix("user"){
         concat(

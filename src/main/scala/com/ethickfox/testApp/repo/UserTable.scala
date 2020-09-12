@@ -1,5 +1,5 @@
 package com.ethickfox.testApp.repo
-import java.time.LocalDate
+import java.sql.Date
 
 import slick.jdbc.H2Profile.api._
 
@@ -8,8 +8,8 @@ class UserTable(tag: Tag) extends Table[User](tag, None, "user") {
   val id = column[Long]("Id", O.AutoInc, O.PrimaryKey)
   val firstName = column[String]("FirstName")
   val lastName = column[String]("LastName")
-  val birthday  = column[Option[LocalDate]]("Birthday")
+  val birthday  = column[Date]("Birthday")
   val address = column[String]("Address")
 }
 
-case class User(id:Long, firstName:String, lastName:String, birthday:Option[LocalDate], address:String)
+case class User(id:Long, firstName:String, lastName:String, birthday:Date, address:String)
