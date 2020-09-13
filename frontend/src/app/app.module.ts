@@ -74,6 +74,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     HttpClientModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatTableModule,
   ],
   exports: [
     A11yModule,
