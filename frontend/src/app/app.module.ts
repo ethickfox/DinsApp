@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppComponent, DialogOverviewExampleDialog} from './app.component';
 // import {MatListModule} from "@angular/material/list";
 import {FormsModule} from "@angular/forms";
 // import {NgModule} from '@angular/core';
@@ -55,14 +55,19 @@ import { ReactiveFormsModule} from '@angular/forms';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 // import {DemoMaterialModule} from './app/material-module';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 // import {TableBasicExample} from './app/table-basic-example';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DialogOverviewExampleDialog
   ],
   imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
     BrowserModule,
     AppRoutingModule,
     MatListModule,
@@ -77,6 +82,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
     MatTableModule,
   ],
   exports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
     A11yModule,
     ClipboardModule,
     CdkStepperModule,

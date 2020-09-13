@@ -23,6 +23,7 @@
     "@angular/router": "~10.1.1",
     "angular4-material-table": "^0.8.0",
     "rxjs": "~6.6.0",
+    "scss": "^0.2.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
