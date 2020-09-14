@@ -28,15 +28,14 @@ export class AppComponent implements OnInit{
   }
 
   createUser(user:User){
-    console.log("creating user "+user.firstName)
+    user.birthday.setDate(user.birthday.getDate() + 1);
     const body = {
       id: 99,
       firstName: user.firstName,
       lastName: user.lastName,
-      birthday: user.birthday,
+      birthday: user.birthday.toISOString().split('T')[0],
       address: user.address
     };
-
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
