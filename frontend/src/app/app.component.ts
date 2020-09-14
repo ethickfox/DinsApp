@@ -98,14 +98,15 @@ export class AppComponent implements OnInit{
 
   }
   updateUser(id){
-    console.log(this.getUserFromDataSource(id))
+    this.getUserFromDataSource(id).birthday.setDate(this.getUserFromDataSource(id).birthday.getDate() + 1);
     const body = {
         id: this.getUserFromDataSource(id).id,
         firstName: this.getUserFromDataSource(id).firstName,
         lastName: this.getUserFromDataSource(id).lastName,
-        birthday: this.getUserFromDataSource(id).birthday,
+        birthday:this.getUserFromDataSource(id).birthday.toISOString().split('T')[0],
         address: this.getUserFromDataSource(id).address
     };
+
 
     const options = {
       headers: new HttpHeaders({
