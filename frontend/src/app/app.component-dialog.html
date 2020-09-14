@@ -1,41 +1,34 @@
-<!--<h1 mat-dialog-title>Hi {{data.name}}</h1>-->
+<div mat-dialog-container class="md-dialog-container">
+<h1 mat-dialog-title>User editing: {{data['user'].firstName}} {{data['user'].lastName}} [{{data['user'].id}}]</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Change user information?</p>
   <mat-form-field>
-    <mat-label>{{data.id}}</mat-label>
-    <input matInput [(ngModel)]="data.id">
+    <mat-label>First Name</mat-label>
+    <input matInput [(ngModel)]="data['user'].firstName">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.firstName">
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="data['user'].lastName">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.lastName">
+    <mat-label>Birthday</mat-label>
+    <input matInput  [matDatepicker]="picker" [(ngModel)]="data['user'].birthday">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
   <mat-form-field>
     <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.birthday">
-  </mat-form-field>
-</div>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.address">
+    <input matInput [(ngModel)]="data['user'].address">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Save</button>
-  <button mat-button (click)="onNoClick()">Delete</button>
-<!--  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>-->
+  <button mat-button (click)="data['user'].id===null?onCreateUser():onSaveClick(data['user'].id)">Save</button>
+  <button mat-button *ngIf="data['user'].id" (click)="onDeleteClick(data['user'].id)">Delete</button>
+</div>
 </div>

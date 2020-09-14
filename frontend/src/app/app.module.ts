@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import {AppComponent, DialogOverviewExampleDialog} from './app.component';
+import {AppComponent, DialogOverview} from './app.component';
 // import {MatListModule} from "@angular/material/list";
 import {FormsModule} from "@angular/forms";
 // import {NgModule} from '@angular/core';
@@ -58,10 +58,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 // import {TableBasicExample} from './app/table-basic-example';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    DialogOverviewExampleDialog
+    DialogOverview
   ],
   imports: [
     MatButtonModule,
@@ -80,6 +81,8 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/mater
     MatNativeDateModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,

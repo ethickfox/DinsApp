@@ -18,7 +18,6 @@ import scala.concurrent._
 import ExecutionContext.Implicits.global
 
 
-
 object Main extends App {
   implicit val system: ActorSystem = ActorSystem("simple-http")
   implicit val materializer: ActorMaterializer = ActorMaterializer()

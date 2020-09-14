@@ -8,8 +8,8 @@ class UserTable(tag: Tag) extends Table[User](tag, None, "user") {
   val id = column[Long]("Id", O.AutoInc, O.PrimaryKey)
   val firstName = column[String]("FirstName")
   val lastName = column[String]("LastName")
-  val birthday  = column[Date]("Birthday")
+  val birthday  = column[String]("Birthday")
   val address = column[String]("Address")
 }
 
-case class User(id:Long, firstName:String, lastName:String, birthday:Date, address:String)
+case class User(id:Long, firstName:String, lastName:String, birthday:String, address:String)
