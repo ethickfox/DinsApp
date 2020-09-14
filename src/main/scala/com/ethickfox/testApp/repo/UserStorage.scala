@@ -5,7 +5,7 @@ import java.sql.Date
 import scala.concurrent.Future
 import slick.lifted.TableQuery
 import slick.jdbc.H2Profile.api._
-import com.ethickfox.testApp.Main.db
+import com.ethickfox.testApp.Main.{db, log}
 
 
 object UserStorage {
@@ -25,7 +25,6 @@ object UserStorage {
 //      (firstName: String, lastName: String, birthday: String, address: String))
 //  }
   def createUser(user: User): Future[Int] = {
-  println(user)
     db.run(users.map(p => (p.firstName, p.lastName, p.birthday, p.address)) +=
       (user.firstName, user.lastName, user.birthday, user.address))
   }

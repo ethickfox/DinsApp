@@ -7,9 +7,6 @@ import {APP_DATE_FORMATS,AppDateAdapter} from "./date.adapter"
 import {User} from "./app.user"
 
 
-
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -43,7 +40,6 @@ export class AppComponent implements OnInit{
 
 
     this.http.post("/api/user/create",body,options).subscribe((s) => {
-      console.log(s)
     });
   }
   openDialog(idNum): void {

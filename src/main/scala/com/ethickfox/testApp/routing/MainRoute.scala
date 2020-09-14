@@ -6,18 +6,14 @@ import akka.http.scaladsl.server.Directives.{complete, get, path}
 import akka.http.scaladsl.server.Route
 import com.ethickfox.testApp.Main.log
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.unmarshalling.Unmarshal
-import com.ethickfox.testApp.repo.{User, UserStorage}
+import com.ethickfox.testApp.repo.User
 import com.ethickfox.testApp.repo.UserStorage.{createUser, getUserById, getUsers, removeUserById, updateUserById}
 import com.google.gson.Gson
 import spray.json.DefaultJsonProtocol
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import spray.json.DefaultJsonProtocol.jsonFormat5
-//import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import spray.json._
 
 import scala.concurrent._
-import ExecutionContext.Implicits.global
 import scala.concurrent.duration.{Duration, DurationInt}
 
 trait JsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
@@ -47,7 +43,7 @@ class MainRoute extends JsonSupport{
                 name =>
                   delete {
                     onSuccess(removeUserById(name)) { performed =>
-                      complete(StatusCodes.OK)
+                      complete(new Gson().toJson(StatusCodes.OK))
                     }
                   }
               }
@@ -58,9 +54,8 @@ class MainRoute extends JsonSupport{
             path("update") {
               put {
                 entity(as[User]) { user => {
-                  println(user)
                   onSuccess(updateUserById(user.id, user)) { performed =>
-                    complete(StatusCodes.OK)
+                    complete(new Gson().toJson(StatusCodes.OK))
                   }
                 }
                 }
@@ -69,9 +64,8 @@ class MainRoute extends JsonSupport{
             path("create") {
               post {
                 entity(as[User]) { user => {
-                  println(user)
                   onSuccess(createUser(user)) { performed =>
-                    complete(StatusCodes.OK)
+                    complete(new Gson().toJson(StatusCodes.OK))
                   }
                 }
                 }
