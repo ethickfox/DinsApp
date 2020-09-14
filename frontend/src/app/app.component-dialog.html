@@ -4,13 +4,13 @@
   <p>Change user information?</p>
   <mat-form-field>
     <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="data['user'].firstName">
+    <input matInput [(ngModel)]="data['user'].firstName" required="">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="data['user'].lastName">
+    <input matInput [(ngModel)]="data['user'].lastName" required="">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
@@ -24,11 +24,11 @@
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data['user'].address">
+    <input matInput [(ngModel)]="data['user'].address" required="">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="data['user'].id===null?onCreateUser():onSaveClick(data['user'].id)">Save</button>
+  <button mat-button *ngIf="data['user'].firstName && data['user'].lastName && data['user'].address" (click)="data['user'].id===null?onCreateUser():onSaveClick(data['user'].id)">Save</button>
   <button mat-button *ngIf="data['user'].id" (click)="onDeleteClick(data['user'].id)">Delete</button>
 </div>
 </div>

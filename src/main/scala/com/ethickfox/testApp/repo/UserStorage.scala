@@ -20,10 +20,6 @@ object UserStorage {
         .update(user.firstName, user.lastName, user.birthday, user.address)
     )
   }
-//  def createUser(firstName: String, lastName: String, birthday: String, address: String): Future[Int] = {
-//    db.run(users.map(p => (p.firstName, p.lastName, p.birthday, p.address)) +=
-//      (firstName: String, lastName: String, birthday: String, address: String))
-//  }
   def createUser(user: User): Future[Int] = {
     db.run(users.map(p => (p.firstName, p.lastName, p.birthday, p.address)) +=
       (user.firstName, user.lastName, user.birthday, user.address))

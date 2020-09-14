@@ -7,7 +7,7 @@ export interface User {
 }
 
 export class User{
-  constructor(id,firstName,lastName,birthday,address) {
+  constructor(id:number,firstName:string,lastName:string,birthday:Date,address:string) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;

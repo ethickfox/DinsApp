@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import { Component, Inject, OnInit} from '@angular/core';
+import {HttpClient,  HttpHeaders} from '@angular/common/http';
+import {MatTableDataSource} from "@angular/material/table";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {DateAdapter, MatDateFormats, MAT_DATE_FORMATS, NativeDateAdapter} from "@angular/material/core";
+import {DateAdapter, MAT_DATE_FORMATS} from "@angular/material/core";
 import {APP_DATE_FORMATS,AppDateAdapter} from "./date.adapter"
 import {User} from "./app.user"
 
@@ -39,14 +39,13 @@ export class AppComponent implements OnInit{
       })}
 
 
-    this.http.post("/api/user/create",body,options).subscribe((s) => {
-    });
+    this.http.post("/api/user/create",body,options);
   }
   openDialog(idNum): void {
     const dialogRef = this.dialog.open(DialogOverview, {
        data: {user: this.getUserFromDataSource(idNum), component:this},
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.updateFromServer()
     });
   }
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit{
     const dialogRef = this.dialog.open(DialogOverview, {
       data: {user: tmpUser, component:this},
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.updateFromServer()
     });
   }
@@ -63,10 +62,6 @@ export class AppComponent implements OnInit{
     this.http.get(this.userUrl)
       .subscribe(data => {
         this.dataSource.data = data["prefix1"]
-        this.dataSource.data.forEach(x=>{
-
-          // Date.parse(x.birthday)
-        })
       }, error => console.error(error));
   }
   deleteUser(id){
@@ -77,7 +72,7 @@ export class AppComponent implements OnInit{
     };
 
     this.http.delete("/api/user/delete/"+id, options)
-      .subscribe((s) => {
+      .subscribe(() => {
         this.updateFromServer()
       });
   }
@@ -93,12 +88,18 @@ export class AppComponent implements OnInit{
 
   }
   updateUser(id){
-    this.getUserFromDataSource(id).birthday.setDate(this.getUserFromDataSource(id).birthday.getDate() + 1);
+    let bd:string;
+    if(typeof this.getUserFromDataSource(id).birthday === "string"){
+      bd = this.getUserFromDataSource(id).birthday.toString();
+    }else{
+      this.getUserFromDataSource(id).birthday.setDate(this.getUserFromDataSource(id).birthday.getDate() + 1);
+      bd = this.getUserFromDataSource(id).birthday.toISOString().split('T')[0]
+    }
     const body = {
         id: this.getUserFromDataSource(id).id,
         firstName: this.getUserFromDataSource(id).firstName,
         lastName: this.getUserFromDataSource(id).lastName,
-        birthday:this.getUserFromDataSource(id).birthday.toISOString().split('T')[0],
+        birthday: bd,//this.getUserFromDataSource(id).birthday,//.toISOString().split('T')[0],
         address: this.getUserFromDataSource(id).address
     };
 
@@ -110,7 +111,7 @@ export class AppComponent implements OnInit{
 
 
     this.http.put("/api/user/update",body, options)
-      .subscribe((s) => {
+      .subscribe(() => {
         this.updateFromServer()
       });}
   apiUrl = '/api'
