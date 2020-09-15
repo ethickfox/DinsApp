@@ -18,15 +18,19 @@ import com.ethickfox.testApp.routing.{ApiRoute, MainRoute}
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 
-
+//основной объект приложения
 object Main extends App {
-  implicit val system: ActorSystem = ActorSystem("simple-http")
+  //создание основного актора
+  implicit val system: ActorSystem = ActorSystem("dinsApp")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
+  //создание логгера
   implicit val log: LoggingAdapter = Logging(system, "main")
-  val port = 8080
+  val port = 8081
+  //создание объекта, для взяаимодействия с базой данных и пременение параметров из application.config
   val db = Database.forConfig("postgres")
-  db.createSession()
+  //объединение всех маршрутов
   val routes: Route = new MainRoute().mainRoute ~ new ApiRoute().apiRoute
+  // назначение порта и маршрутов
   val bindingFuture = Http().bindAndHandle(routes,"localhost", port)
   log.info(s"Server works. Port $port")
 }
