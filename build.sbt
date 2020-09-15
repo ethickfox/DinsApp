@@ -26,5 +26,4 @@ libraryDependencies ++= Seq(
   "io.spray" %% "spray-json" % "1.3.5",
 
   "com.google.code.gson" % "gson" % "2.8.6"
-
 )

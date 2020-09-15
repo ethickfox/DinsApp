@@ -1,7 +1,7 @@
 package com.ethickfox.testApp.routing
 
 import akka.http.scaladsl.model.{StatusCode, StatusCodes}
-import akka.http.scaladsl.model.StatusCodes.Redirection
+import akka.http.scaladsl.model.StatusCodes.{PermanentRedirect, Redirection}
 import akka.http.scaladsl.server.Directives.{complete, get, path}
 import akka.http.scaladsl.server.Route
 import com.ethickfox.testApp.Main.log
@@ -16,62 +16,17 @@ import spray.json._
 import scala.concurrent._
 import scala.concurrent.duration.{Duration, DurationInt}
 
-trait JsonSupport extends SprayJsonSupport with DefaultJsonProtocol {
-  implicit val clientJsonFormat: RootJsonFormat[User] = jsonFormat5(User)
-}
 
-class MainRoute extends JsonSupport{
-  val api:Route =
-    path(""){
-      getFromResource("static/index.html")
-    }~
-    pathPrefix("api") {
-        path("users") {
-          val json = new Gson().toJson(Await.result(getUsers, Duration.Inf))
-          log.info(json)
-          get {
-            complete(json)
-          }
-        }~
-        pathPrefix("user") {
-          concat(
-            pathEnd {
-              redirect("/api/users", StatusCodes.PermanentRedirect)
-            },
-            pathPrefix("delete") {
-              path(IntNumber) {
-                name =>
-                  delete {
-                    onSuccess(removeUserById(name)) { performed =>
-                      complete(new Gson().toJson(StatusCodes.OK))
-                    }
-                  }
-              }
-            },
-            path(IntNumber) { int =>
-              complete(new Gson().toJson(Await.result(getUserById(int), 1.second)))
-            },
-            path("update") {
-              put {
-                entity(as[User]) { user => {
-                  onSuccess(updateUserById(user.id, user)) { performed =>
-                    complete(new Gson().toJson(StatusCodes.OK))
-                  }
-                }
-                }
-              }
-            },
-            path("create") {
-              post {
-                entity(as[User]) { user => {
-                  onSuccess(createUser(user)) { performed =>
-                    complete(new Gson().toJson(StatusCodes.OK))
-                  }
-                }
-                }
-              }
-            }
-          )
+
+class MainRoute {
+  def mainRoute:Route = {
+    def redirectSingleSlash =
+      pathSingleSlash {
+        get {
+          redirect("index.html", PermanentRedirect)
         }
-    }
+      }
+
+    getFromResourceDirectory("frontend") ~ redirectSingleSlash
+  }
 }

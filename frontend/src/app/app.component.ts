@@ -26,6 +26,7 @@ export class AppComponent implements OnInit{
 
   createUser(user:User){
     user.birthday.setDate(user.birthday.getDate() + 1);
+
     const body = {
       id: 99,
       firstName: user.firstName,
@@ -39,7 +40,8 @@ export class AppComponent implements OnInit{
       })}
 
 
-    this.http.post("/api/user/create",body,options);
+    this.http.post("/api/user/create",body,options)
+      .subscribe(data => {}, error => console.error(error));
   }
   openDialog(idNum): void {
     const dialogRef = this.dialog.open(DialogOverview, {
